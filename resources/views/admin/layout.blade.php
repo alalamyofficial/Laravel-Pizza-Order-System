@@ -50,7 +50,7 @@
 
     <div class="wrapper">
       
-              <!--
+      <!--
           ====================================
           ——— LEFT SIDEBAR WITH FOOTER
           =====================================
@@ -70,22 +70,6 @@
           </div>       
         
           <footer class="footer mt-auto">
-            <div class="copyright bg-white">
-              <p>
-                &copy; <span id="copy-year">2019</span> Copyright Sleek Dashboard Bootstrap Template by
-                <a
-                  class="text-primary"
-                  href="http://www.iamabdus.com/"
-                  target="_blank"
-                  >Abdus</a
-                >.
-              </p>
-            </div>
-            <script>
-                var d = new Date();
-                var year = d.getFullYear();
-                document.getElementById("copy-year").innerHTML = year;
-            </script>
           </footer>
 
       </div>
@@ -113,7 +97,16 @@
 <script src="{{asset('admin/js/map.js')}}"></script>
 <script src="{{asset('admin/js/custom.js')}}"></script>
 
-
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 
 
   </body>

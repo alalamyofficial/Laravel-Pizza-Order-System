@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Jobs\sendMails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(Auth::user()->role_as == 1){
+            return redirect()->route('admin.dashboard');
+        }else{
+            return redirect('/');
+        }
+    }
+
+    public function sendMail(){
+
+        $emails = User::select('email')->chunk(50,function($data){
+            dispatch(new sendMails($data));
+        });
+
+        return 'Mail Send Successfully';
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use App\Mail;
 use App\Menu;
+use App\Order;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -51,4 +53,15 @@ class SiteController extends Controller
         return view('site.about');
     }
 
+    
+    public function blog(){
+        $blogs = Blog::latest()->get();    
+        return view('site.blog',compact('blogs'));
+    }
+
+    public function myOrders(){
+
+        $orders = Order::where('user_id',request()->user()->id)->latest()->get();    
+        return view('site.orders',compact('orders'));
+    }
 }

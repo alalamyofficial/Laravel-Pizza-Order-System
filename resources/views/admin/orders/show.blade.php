@@ -29,7 +29,7 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                     @foreach($orders as $order)
                     <tr>
                         <td scope="row">{{$loop->index+1}}</td>

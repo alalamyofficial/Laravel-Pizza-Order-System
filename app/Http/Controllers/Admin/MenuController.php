@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Menu;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
     public function show(){
         $plates = Menu::latest()->get();
-        return view('admin.menu.show',compact('plates'));
+
+        if(Auth::user()->role_as == 1){
+            return view('admin.menu.show',compact('plates'));
+        }else{
+            abort(404);
+        }    
     }
 
     public function create(){
-        return view('admin.menu.create');
+        if(Auth::user()->role_as == 1){
+            return view('admin.menu.create');
+        }else{
+            abort(404);
+        }    
     }
 
     public function store(Request $request){
@@ -46,7 +56,12 @@ class MenuController extends Controller
     public function edit($id){
 
         $plate = Menu::find($id);
-        return view('admin.menu.edit',compact('plate'));
+
+        if(Auth::user()->role_as == 1){
+            return view('admin.menu.edit',compact('plate'));
+        }else{
+            abort(404);
+        }    
 
     }
 
@@ -84,7 +99,13 @@ class MenuController extends Controller
     public function destroy($id){
 
         $plate = Menu::find($id); 
-        $plate->destroy($id);
+
+        if(Auth::user()->role_as == 1){
+            $plate->destroy($id);
+        }else{
+            abort(404);
+        }    
+
         return redirect()->route('admin.plate.show');
  
     }

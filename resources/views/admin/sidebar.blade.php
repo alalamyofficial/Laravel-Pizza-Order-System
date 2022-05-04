@@ -20,7 +20,7 @@
             <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
             </g>
         </svg>
-        <span class="brand-name">Sleek Dashboard</span>
+        <span class="brand-name">Pizza Dashboard</span>
         </a>
     </div>
     <!-- begin sidebar scrollbar -->
@@ -29,22 +29,18 @@
         <!-- sidebar menu -->
         <ul class="nav sidebar-inner" id="sidebar-menu">
         
-
-        
             <li  class="has-sub active expand" >
-                <a class="sidenav-item-link" href="admin/dashbaord" data-toggle="collapse" data-target="#dashboard"
+                <a class="sidenav-item-link" href="{{route('admin.dashboard')}}" data-toggle="collapse" data-target="#dashboard"
                     aria-expanded="false" aria-controls="dashboard">
                     <i class="mdi mdi-view-dashboard-outline"></i>
-                    <span class="nav-text">Dashboard</span>
+                    <span class="nav-text" href="{{route('admin.dashboard')}}">Dashboard</span>
                 </a>
             </li>
         
 
         
-
-        
             <li  class="has-sub" >
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#ui-elements1"
+            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#ui-elements1"
                 aria-expanded="false" aria-controls="ui-elements1">
                 <i class="mdi mdi-food"></i>
                 
@@ -68,7 +64,7 @@
             </li>
         
             <li  class="has-sub" >
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#ui-elements2"
+            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#ui-elements2"
                 aria-expanded="false" aria-controls="ui-elements2">
                 <i class="mdi mdi-shopify"></i>
                 
@@ -93,7 +89,7 @@
 
 
             <li  class="has-sub" >
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#ui-elements3"
+            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#ui-elements3"
                 aria-expanded="false" aria-controls="ui-elements3">
                 <i class="mdi mdi-nature-people"></i>
                 
@@ -112,7 +108,7 @@
             </li>
 
             <li  class="has-sub" >
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#ui-elements4"
+            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#ui-elements4"
                 aria-expanded="false" aria-controls="ui-elements4">
                 <i class="mdi mdi-message"></i>
                 
@@ -132,7 +128,7 @@
 
 
             <li  class="has-sub" >
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#ui-elements5"
+            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#ui-elements5"
                 aria-expanded="false" aria-controls="ui-elements5">
                 <i class="mdi mdi-cart-off"></i>
                 
@@ -158,23 +154,23 @@
 
 
             <li  class="has-sub" >
-            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#ui-elements2"
-                aria-expanded="false" aria-controls="ui-elements2">
+            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#ui-elements6"
+                aria-expanded="false" aria-controls="ui-elements6">
                 <i class="mdi mdi-newspaper"></i>
                 
                 <span class="nav-text">Blog</span> <b class="caret"></b>
             </a>
-            <ul  class="collapse"  id="ui-elements2"
+            <ul  class="collapse"  id="ui-elements6"
                 data-parent="#sidebar-menu">
                 <div class="sub-menu">             
                     <li>
-                        <a class="sidenav-item-link" href="{{route('admin.order.create')}}">
-                            <span class="nav-text">Add Order</span>
+                        <a class="sidenav-item-link" href="{{route('admin.blog.create')}}">
+                            <span class="nav-text">Add Blog</span>
                         </a>
                     </li>
                     <li>
-                        <a class="sidenav-item-link" href="{{route('admin.order.show')}}">
-                            <span class="nav-text">Show Orders</span>
+                        <a class="sidenav-item-link" href="{{route('admin.blog.show')}}">
+                            <span class="nav-text">Show Blogs</span>
                         </a>
                     </li>
                 </div>

@@ -26,7 +26,7 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                     @foreach($plates as $plate)
                     <tr>
                         <td scope="row">{{$loop->index+1}}</td>

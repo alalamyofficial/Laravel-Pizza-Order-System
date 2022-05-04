@@ -5,13 +5,19 @@ namespace App\Http\Controllers\Admin;
 use App\Coupon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
 {
     public function create(){
 
         $coupons = Coupon::latest()->get(); 
-        return view('admin.coupon.create',compact('coupons'));
+
+        if(Auth::user()->role_as == 1){
+            return view('admin.coupon.create',compact('coupons'));
+        }else{
+            abort(404);
+        }    
 
     }
 
@@ -43,9 +49,14 @@ class CouponController extends Controller
     }
 
     public function show(){
+        
         $coupons = Coupon::latest()->get(); 
 
-        return view('admin.coupon.show',compact('coupons'));
+        if(Auth::user()->role_as == 1){
+            return view('admin.coupon.show',compact('coupons'));
+        }else{
+            abort(404);
+        }    
 
     }
 
@@ -54,7 +65,11 @@ class CouponController extends Controller
 
         $coupon = Coupon::find($id);
 
-        return view('admin.coupon.edit',compact('coupon'));
+        if(Auth::user()->role_as == 1){
+            return view('admin.coupon.edit',compact('coupon'));
+        }else{
+            abort(404);
+        }    
 
     }
 
@@ -93,7 +108,11 @@ class CouponController extends Controller
 
         $coupoun = Coupon::find($id);
 
-        $coupon->destroy($id);
+        if(Auth::user()->role_as == 1){
+            $coupon->destroy($id);
+        }else{
+            abort(404);
+        }    
 
         return back();
 

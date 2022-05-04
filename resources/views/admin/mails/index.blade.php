@@ -23,7 +23,7 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                     @foreach($mails as $mail)
                     <tr>
                         <td scope="row">{{$loop->index+1}}</td>

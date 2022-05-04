@@ -5,16 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function show(){
         $orders = Order::latest()->get();
-        return view('admin.orders.show',compact('orders'));
+
+        if(Auth::user()->role_as == 1){
+            return view('admin.orders.show',compact('orders'));
+        }else{
+            abort(404);
+        }    
     }
 
     public function create(){
-        return view('admin.orders.create');
+        if(Auth::user()->role_as == 1){
+            return view('admin.orders.create');
+        }else{
+            abort(404);
+        }    
     }
 
     public function store(Request $request){
@@ -76,7 +86,12 @@ class OrderController extends Controller
     public function edit($id){
 
         $order = Order::find($id);
-        return view('admin.orders.edit',compact('order'));
+
+        if(Auth::user()->role_as == 1){
+            return view('admin.orders.edit',compact('order'));
+        }else{
+            abort(404);
+        }    
 
     }
 
@@ -118,8 +133,13 @@ class OrderController extends Controller
     public function destroy($id){
 
         $order = Order::find($id); 
-        $order->destroy($id);
-        return redirect()->route('admin.orders.show');
+
+        if(Auth::user()->role_as == 1){
+            $order->destroy($id);
+            return redirect()->route('admin.orders.show');
+        }else{
+            abort(404);
+        }    
  
     }
 
@@ -127,7 +147,10 @@ class OrderController extends Controller
 
         $order = Order::find($id); 
 
-        return view('admin.orders.order',compact('order'));
-
+        if(Auth::user()->role_as == 1){
+            return view('admin.orders.order',compact('order'));
+        }else{
+            abort(404);
+        }    
     }
 }

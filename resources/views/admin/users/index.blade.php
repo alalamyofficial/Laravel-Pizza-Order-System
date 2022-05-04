@@ -18,14 +18,22 @@
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Role</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                     @foreach($users as $user)
                     <tr>
                         <td scope="row">{{$loop->index+1}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
+                        <td>
+                            @if($user->role_as == 0)
+                                <span class="badge badge-info">User</span>
+                            @else
+                                <span class="badge badge-success">Admin</span>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
  

@@ -18,13 +18,16 @@ Route::get('/menu','SiteController@menus')->name('menus');
 Route::get('/contact_us','SiteController@contact_us')->name('contact_us');
 Route::post('send/mail','SiteController@send_mail')->name('send_mail');
 Route::get('/about','SiteController@about')->name('about');
+Route::get('/blog','SiteController@blog')->name('blog');
+Route::get('/myorders','SiteController@myOrders')->name('myorders');
 
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+//Mail in Background
+Route::get('bomb/mail','HomeController@sendMail')->name('bombMail');
 
 //Site
 
@@ -58,7 +61,8 @@ Route::group(['middleware'=>'auth'],function(){
 Route::group(['prefix'=>'admin'],function(){
 
     //Dashboard
-    Route::get('dashboard','Admin\AdminController@dashboard');
+    Route::get('dashboard','Admin\AdminController@dashboard')
+         ->name('admin.dashboard');
 
     //Menus
     Route::get('plate/create','Admin\MenuController@create')
@@ -92,14 +96,14 @@ Route::group(['prefix'=>'admin'],function(){
                 ->name('admin.order.view');   
                 
      //User
-     Route::get('admin/users','Admin\UserController@users')
+     Route::get('users','Admin\UserController@users')
                 ->name('admin.users');
            
      //Mails
      Route::get('mails','Admin\MailController@mails')
                 ->name('admin.mails');           
      Route::post('mail/destroy/{id}','Admin\MailController@mails')
-                ->name('admin.mail.destroy');   
+                ->name('admin.mail.destroy');    
                 
      //Coupon
      Route::get('coupon/create','Admin\CouponController@create')
@@ -119,4 +123,27 @@ Route::group(['prefix'=>'admin'],function(){
         
      Route::patch('coupon/destroy/{id}','Admin\CouponController@destroy')
         ->name('admin.coupon.destroy');   
-});
+
+
+
+      //Blog
+
+      Route::get('blog/create','Admin\BlogController@create')
+         ->name('admin.blog.create');   
+               
+      Route::get('blogs','Admin\BlogController@show')
+         ->name('admin.blog.show');     
+      
+      Route::post('blog/store','Admin\BlogController@store')
+         ->name('admin.blog.store');
+      
+      Route::get('blog/edit/{id}','Admin\BlogController@edit')
+         ->name('admin.blog.edit');  
+      
+      Route::patch('blog/update/{id}','Admin\BlogController@update')
+         ->name('admin.blog.update');  
+      
+      Route::patch('blog/destroy/{id}','Admin\BlogController@destroy')
+         ->name('admin.blog.destroy');      
+   });
+
