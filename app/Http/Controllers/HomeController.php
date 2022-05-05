@@ -26,19 +26,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role_as == 1){
-            return redirect()->route('admin.dashboard');
-        }else{
-            return redirect('/');
+        if(Auth::check()){
+            if(Auth::user()->role_as == 1){
+                return redirect()->route('admin.dashboard');
+            }else{
+                return redirect('/');
+            }
         }
     }
 
     public function sendMail(){
 
-        $emails = User::select('email')->chunk(50,function($data){
+        $emails = User::select("*")->chunk(50,function($data){
             dispatch(new sendMails($data));
         });
-
-        return 'Mail Send Successfully';
+        return redirect()
+                         ->back()
+                         ->with('message','Mail Send Successfully');
     }
 }

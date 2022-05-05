@@ -33,7 +33,7 @@
                  width="150px" src="{{asset($blog->image)}}" data-holder-rendered="true">
                 <div class="card-body">
                   <h2 class="text">{{$blog->title}}</h2><br>
-                  <p class="card-text">{{$blog->body}}</p>
+                  <p class="card-text">{{Str::limit($blog->body,60)}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">View</button>

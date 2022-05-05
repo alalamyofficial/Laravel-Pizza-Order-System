@@ -8,6 +8,8 @@ class Order extends Model
 {
     protected $guarded = [];
 
+    public $with = ["user"];
+
     public function items()
     {
         return 

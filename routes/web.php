@@ -26,8 +26,6 @@ Route::get('/myorders','SiteController@myOrders')->name('myorders');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-//Mail in Background
-Route::get('bomb/mail','HomeController@sendMail')->name('bombMail');
 
 //Site
 
@@ -63,6 +61,12 @@ Route::group(['prefix'=>'admin'],function(){
     //Dashboard
     Route::get('dashboard','Admin\AdminController@dashboard')
          ->name('admin.dashboard');
+
+    //Website Logs   
+    Route::get('logs', 
+      [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']
+      )->middleware('auth');
+
 
     //Menus
     Route::get('plate/create','Admin\MenuController@create')
@@ -103,7 +107,11 @@ Route::group(['prefix'=>'admin'],function(){
      Route::get('mails','Admin\MailController@mails')
                 ->name('admin.mails');           
      Route::post('mail/destroy/{id}','Admin\MailController@mails')
-                ->name('admin.mail.destroy');    
+                ->name('admin.mail.destroy');   
+                
+     //Mail in Background
+     Route::get('bomb/mail','HomeController@sendMail')
+            ->name('admin.send.bombMail');
                 
      //Coupon
      Route::get('coupon/create','Admin\CouponController@create')

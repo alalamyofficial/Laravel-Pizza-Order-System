@@ -1,45 +1,61 @@
 @extends('admin.layout')
 @section('content')
 
-<form action="{{route('admin.plate.update',$plate->id)}}" method="post" enctype="multipart/form-data">
+<form class="text-warning" action="{{route('orders.update',$order->id)}}" method="post">
     @csrf
-    @method('patch')
-    <div class="form-group">
-        <label for="name">Plate Name</label>
-        <input type="text" name="name" class="form-control" value="{{$plate->name}}" placeholder="Enter Plate Name">
-    </div>
 
     <div class="form-group">
-        <label for="description">Description</label>
-        <textarea name="description" class="form-control" 
-        cols="30" rows="10">{{$plate->description}}</textarea>
+        <label for="">Full Name</label>
+        <input type="text" name="shipping_fullname" id="" class="form-control">
     </div>
 
     <div class="form-group">
-        <label for="image">Image</label>
-        <input type="file" class="form-control" name="image" id="">
+        <label for="">State</label>
+        <input type="text" name="shipping_state" id="" class="form-control">
     </div>
 
     <div class="form-group">
-        <label for="price">Price</label>
-        <input type="text" value="{{$plate->price}}" name="price" class="form-control" placeholder="$">
+        <label for="">City</label>
+        <input type="text" name="shipping_city" id="" class="form-control">
     </div>
 
-    <label class="control control-checkbox">Publish
-        @if($plate->is_published == 1)
-            <input type="checkbox" name="is_published" checked="checked">
-        @else
-            <input type="checkbox" name="is_published">
-        @endif       
-
-        <div class="control-indicator"></div>
-    </label>
-
-    <div>
-        <button type="submit" class="mb-1 btn btn-pill btn-success">
-            <i class="mr-1 fa fa-star-o"></i> Update
-        </button>
+    <div class="form-group">
+        <label for="">Zip</label>
+        <input type="number" name="shipping_zipcode" id="" class="form-control">
     </div>
+
+    <div class="form-group">
+        <label for="">Full Address</label>
+        <input type="text" name="shipping_address" id="" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="">Mobile</label>
+        <input type="text" name="shipping_phone" id="" class="form-control">
+    </div>
+
+    <h4>Payment option</h4>
+
+    <div class="form-check">
+        <label class="form-check-label">
+            <input type="radio" checked class="form-check-input" name="payment_method" id="" value="cash_on_delivery">
+            Cash on delivery
+
+        </label>
+
+    </div>
+
+    <div class="form-check">
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="payment_method" id="" value="paypal">
+            Paypal
+        </label>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary mt-3">Place Order</button>
+
+
 </form>
 
 

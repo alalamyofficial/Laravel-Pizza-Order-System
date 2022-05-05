@@ -20,11 +20,15 @@ class AdminController extends Controller
         $coupons = Coupon::latest()->get();
         $mails = Mail::latest()->get();
 
-        if(Auth::user()->role_as == 1){
-            return view('admin.dashboard',
-            compact('menus','orders','coupons','mails'));
+        if(Auth::check()){
+            if(Auth::user()->role_as == 1){
+                return view('admin.dashboard',
+                compact('menus','orders','coupons','mails'));
+            }else{
+                abort(404);
+            }
         }else{
-            abort(404);
+            return redirect('/');
         }
 
     }

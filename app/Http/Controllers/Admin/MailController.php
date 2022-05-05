@@ -29,7 +29,7 @@ class MailController extends Controller
         }else{
             abort(404);
         }    
-        return back();
+        return back()->with('message','Mail Deleted Successfully');
 
     }
 }

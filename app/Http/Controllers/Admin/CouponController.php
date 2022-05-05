@@ -44,7 +44,7 @@ class CouponController extends Controller
         ]);
 
         $coupoun->save();
-        return back();
+        return back()->with('message','Coupon Created Successfully');
 
     }
 
@@ -100,7 +100,7 @@ class CouponController extends Controller
 
         $coupoun->update($coupoun_update);
 
-        return back();
+        return back()->with('message','Coupon Updated Successfully');
 
     }
 
@@ -114,7 +114,7 @@ class CouponController extends Controller
             abort(404);
         }    
 
-        return back();
+        return back()->with('message','Coupon Deleted Successfully');
 
     }
 }

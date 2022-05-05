@@ -1,12 +1,23 @@
 @extends('admin.layout')
 @section('content')
 
+@include('admin.alert')
+
 <div class="col-lg-12">
     <div class="card card-default">
         <div class="card-header card-header-border-bottom">
-            
             <div class="d-flex">
-                <h2 class="mr-5">Mails</h2>
+                <div>
+                    <h2 class="mr-5">Mails</h2>
+                </div>
+                <div>
+                    <a class="btn btn-success btn-sm" 
+                        href="{{route('admin.send.bombMail')}}">
+                        Send Bomb Mails
+                    </a>
+                    <small>this will send advertising emails to users</small>
+ 
+                </div>
             </div>
 
         </div>

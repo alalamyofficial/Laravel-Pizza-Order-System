@@ -49,7 +49,9 @@ class MenuController extends Controller
         ]);
         
         $image->move('public/uploads/posts',$new_image);
-        return redirect()->route('admin.plate.show');
+        return redirect()
+            ->route('admin.plate.show')
+            ->with('message','Plate Created Successfully');
 
     }
 
@@ -92,7 +94,9 @@ class MenuController extends Controller
         $plate->update($update_menu);
         $plate->save();
 
-        return redirect()->route('admin.plate.show');
+        return redirect()
+                    ->route('admin.plate.show')
+                    ->with('message','Plated Updated Successfully');
 
     }
 
@@ -106,7 +110,9 @@ class MenuController extends Controller
             abort(404);
         }    
 
-        return redirect()->route('admin.plate.show');
+        return redirect()
+                    ->route('admin.plate.show')
+                    ->with('message','Plated Deleted Successfully');
  
     }
 }

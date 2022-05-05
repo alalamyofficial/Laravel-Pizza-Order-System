@@ -12,7 +12,8 @@ class SiteController extends Controller
 {
     public function site(){
         $plates = Menu::where('is_published',1)->latest()->take(6)->get();
-        return view('site.main',compact('plates'));
+        $blogs = Blog::latest()->take(3)->get();
+        return view('site.main',compact('plates','blogs'));
     }
 
     public function menus(){

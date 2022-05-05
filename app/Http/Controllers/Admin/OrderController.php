@@ -79,7 +79,9 @@ class OrderController extends Controller
         }
 
         $order->save();
-        return redirect()->route('admin.plate.show');
+        return redirect()
+                    ->route('admin.plate.show')
+                    ->with('message','Order Created Successfully');
 
     }
 
@@ -126,7 +128,9 @@ class OrderController extends Controller
         $plate->update($update_menu);
         $plate->save();
 
-        return redirect()->route('admin.orders.show');
+        return redirect()
+                        ->route('admin.orders.show')
+                        ->with('message','Order Updated Successfully');
 
     }
 
@@ -136,7 +140,9 @@ class OrderController extends Controller
 
         if(Auth::user()->role_as == 1){
             $order->destroy($id);
-            return redirect()->route('admin.orders.show');
+            return redirect()
+                        ->route('admin.orders.show')
+                        ->with('message','Order Deleted Successfully');
         }else{
             abort(404);
         }    

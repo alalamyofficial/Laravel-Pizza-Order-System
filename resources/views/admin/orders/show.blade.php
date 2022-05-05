@@ -1,6 +1,8 @@
 @extends('admin.layout')
 @section('content')
 
+@include('admin.alert')
+
 <div class="col-lg-12">
     <div class="card card-default">
         <div class="card-header card-header-border-bottom">

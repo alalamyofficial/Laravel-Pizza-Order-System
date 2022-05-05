@@ -41,7 +41,9 @@ class BlogController extends Controller
         $image->move('public/uploads/posts',$new_image);
         $blog->save();
 
-        return redirect()->route('admin.blog.show');
+        return redirect()
+                ->route('admin.blog.show')
+                ->with('message','Blog Created Successfully');
 
     }
 
@@ -93,7 +95,7 @@ class BlogController extends Controller
 
         $blog->update($blog_update);
 
-        return back();
+        return back()->with('message','Blog Updated Successfully');
 
     }
 
@@ -107,7 +109,7 @@ class BlogController extends Controller
             abort(404);
         }    
 
-        return back();
+        return back()->with('message','Blog Deleted Successfully');
 
     }
 }
