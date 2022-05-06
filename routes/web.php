@@ -56,7 +56,7 @@ Route::group(['middleware'=>'auth'],function(){
 
 
 
-Route::group(['prefix'=>'admin'],function(){
+Route::group(['prefix'=>'admin','middleware'=>['auth']],function(){
 
     //Dashboard
     Route::get('dashboard','Admin\AdminController@dashboard')
@@ -65,7 +65,7 @@ Route::group(['prefix'=>'admin'],function(){
     //Website Logs   
     Route::get('logs', 
       [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']
-      )->middleware('auth');
+      );
 
 
     //Menus
@@ -97,7 +97,7 @@ Route::group(['prefix'=>'admin'],function(){
      Route::delete('order/destroy/{id}','Admin\OrderController@destroy')
                 ->name('admin.order.destroy');
      Route::get('order/view/{id}','Admin\OrderController@view')
-                ->name('admin.order.view');   
+                ->name('admin.order.view');                       
                 
      //User
      Route::get('users','Admin\UserController@users')

@@ -92,7 +92,7 @@ class OrderController extends Controller
 
         \Cart::session(auth()->id())->clear();
 
-        return "card done";
+        return back()->with('message','Order Send Successfully');
 
     }
 
@@ -113,9 +113,10 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(Order $order,$id)
     {
-        //
+        $order = Order::find($id);
+        return view('admin.orders.edit',compact('order'));
     }
 
     /**
@@ -125,10 +126,69 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
+    // public function update(Request $request , $id)
+    // {
+    //     $order = Order::find($id);
+
+    //     $request->validate([
+    //         'shipping_fullname' => 'required',
+    //         'shipping_state' => 'required',
+    //         'shipping_city' => 'required',
+    //         'shipping_address' => 'required',
+    //         'shipping_phone' => 'required',
+    //         'shipping_zipcode' => 'required',
+    //         'payment_method' => 'required',
+    //     ]);
+
+
+    //     $order->order_number = uniqid('OrderNumber-');
+
+    //     $order->shipping_fullname = $request->input('shipping_fullname');
+    //     $order->shipping_state = $request->input('shipping_state');
+    //     $order->shipping_city = $request->input('shipping_city');
+    //     $order->shipping_address = $request->input('shipping_address');
+    //     $order->shipping_phone = $request->input('shipping_phone');
+    //     $order->shipping_zipcode = $request->input('shipping_zipcode');
+
+    //     if(!$request->has('billing_fullname')) {
+    //         $order->billing_fullname = $request->input('shipping_fullname');
+    //         $order->billing_state = $request->input('shipping_state');
+    //         $order->billing_city = $request->input('shipping_city');
+    //         $order->billing_address = $request->input('shipping_address');
+    //         $order->billing_phone = $request->input('shipping_phone');
+    //         $order->billing_zipcode = $request->input('shipping_zipcode');
+    //     }else {
+    //         $order->billing_fullname = $request->input('billing_fullname');
+    //         $order->billing_state = $request->input('billing_state');
+    //         $order->billing_city = $request->input('billing_city');
+    //         $order->billing_address = $request->input('billing_address');
+    //         $order->billing_phone = $request->input('billing_phone');
+    //         $order->billing_zipcode = $request->input('billing_zipcode');
+    //     }
+
+    //     $order->grand_total = \Cart::session(auth()->id())->getTotal();
+    //     $order->item_count = \Cart::session(auth()->id())->getContent()->count();
+
+    //     $order->user_id = auth()->id();
+
+
+    //     if (request('payment_method') == 'paypal') {
+    //         $order->payment_method = 'paypal';
+    //     }
+
+    //     $order->save();
+
+    //     $cartItems = \Cart::session(auth()->id())->getContent();
+        
+    //     foreach($cartItems as $item) {
+    //         $order->items()->attach($item->id, ['price'=> $item->price, 'quantity'=> $item->quantity]);
+    //     }
+
+    //     \Cart::session(auth()->id())->clear();
+
+    //     return "card done";
+
+    // }
 
     /**
      * Remove the specified resource from storage.

@@ -112,21 +112,45 @@ class OrderController extends Controller
         ]);
 
 
-        $image = $request->file('image');
-        $new_image = time().$image->getClientOriginalName();
-        $image->move('public/uploads/posts',$new_image);
+        $update_order = [
 
-        $update_menu = [
-
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            "image"  => 'public/uploads/posts/'.$new_image,
-            'is_published' => $request->input('is_published') ? true : false
+            'order_number' => uniqid('OrderNumber-'),
+            'shipping_fullname' => $request->input('shipping_fullname'),
+            'shipping_state' => $request->input('shipping_state'),
+            'shipping_city' => $request->input('shipping_city'),
+            'shipping_address' => $request->input('shipping_address'),
+            'shipping_phone' => $request->input('shipping_phone'),
+            'shipping_zipcode' => $request->input('shipping_zipcode'), 
+            'user_id' => auth()->id(),      
+            'grand_total' => $request->grand_total,
+            'item_count' => $request->item_count,
         ];
         
-        $plate->update($update_menu);
-        $plate->save();
+
+        if(!$request->has('billing_fullname')) {
+            $order->billing_fullname = $request->input('shipping_fullname');
+            $order->billing_state = $request->input('shipping_state');
+            $order->billing_city = $request->input('shipping_city');
+            $order->billing_address = $request->input('shipping_address');
+            $order->billing_phone = $request->input('shipping_phone');
+            $order->billing_zipcode = $request->input('shipping_zipcode');
+        }else {
+            $order->billing_fullname = $request->input('billing_fullname');
+            $order->billing_state = $request->input('billing_state');
+            $order->billing_city = $request->input('billing_city');
+            $order->billing_address = $request->input('billing_address');
+            $order->billing_phone = $request->input('billing_phone');
+            $order->billing_zipcode = $request->input('billing_zipcode');
+        }
+
+        
+
+
+        if (request('payment_method') == 'paypal') {
+            $order->payment_method = 'paypal';
+        }
+
+        $order->update($update_order);
 
         return redirect()
                         ->route('admin.orders.show')
